@@ -73,7 +73,7 @@ const Home: React.FC = () => {
     const processSide = (sideNames: { [key: string]: string }) => {
       Object.entries(sideNames).forEach(([key, name]) => {
         if (!name) return;
-        ancestorsSeen[name] = key; // save the field like "sire4", "dam2" etc
+        let ancestorsSeen: { [key: string]: string } = {};
       });
     };
   
