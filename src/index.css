@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes fadeGlow {
+  0% {
+    box-shadow: 0 0 0px rgba(0, 255, 0, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 0px rgba(0, 255, 0, 0.6);
+  }
+}
+
+.animate-fade-glow {
+  animation: fadeGlow 2s ease-in-out infinite;
+}
