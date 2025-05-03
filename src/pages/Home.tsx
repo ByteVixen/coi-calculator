@@ -68,12 +68,12 @@ const Home: React.FC = () => {
       dam8: 3, dam9: 3, dam10: 3, dam11: 3, dam12: 3, dam13: 3, dam14: 3, dam15: 3,
     };
   
-    let ancestorsSeen: { [key: string]: number } = {};
+    let ancestorsSeen: { [key: string]: string } = {};
   
     const processSide = (sideNames: { [key: string]: string }) => {
       Object.entries(sideNames).forEach(([key, name]) => {
         if (!name) return;
-        let ancestorsSeen: { [key: string]: string } = {};
+        ancestorsSeen[name.toLowerCase().trim()] = key;
       });
     };
   
@@ -83,8 +83,16 @@ const Home: React.FC = () => {
     let coi = 0;
   
     Object.keys(ancestorsSeen).forEach((ancestor) => {
-      const sireFields = Object.entries(sireNames).filter(([, v]) => v === ancestor).map(([k]) => k);
-      const damFields = Object.entries(damNames).filter(([, v]) => v === ancestor).map(([k]) => k);
+      const normalizedAncestor = ancestor.toLowerCase().trim();
+
+const sireFields = Object.entries(sireNames)
+  .filter(([, v]) => v.toLowerCase().trim() === normalizedAncestor)
+  .map(([k]) => k);
+
+const damFields = Object.entries(damNames)
+  .filter(([, v]) => v.toLowerCase().trim() === normalizedAncestor)
+  .map(([k]) => k);
+
   
       if (sireFields.length > 0 && damFields.length > 0) {
         const n1 = generationMap[sireFields[0]] ?? 0;
